@@ -1,0 +1,42 @@
+! Startup-config last modified at  Fri May 24 08:35:13 2019 by root
+! device: ceos-1 (cEOSLab, EOS-4.21.5F)
+!
+transceiver qsfp default-mode 4x10G
+!
+hostname ceos-1
+!
+spanning-tree mode mstp
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$ZA9b/1TDlJMtTBaA$1.M3EwfGwmgVkuZuFwfFY5laO3X.F.5rkhjbY39RvcCPSDWTiT7i0v0u3bhiFPAlkonOqHjDV0rU5ApwajK6h.
+!
+interface Ethernet1
+   no switchport
+   ip address 12.12.12.1/24
+!
+interface Loopback0
+   ip address 1.1.1.1/32
+!
+ip access-list copp
+   10 permit ip any any
+!
+ip routing
+!
+control-plane
+   ip access-group copp in
+!
+router bgp 1
+   neighbor 12.12.12.2 remote-as 2
+   neighbor 12.12.12.2 maximum-routes 12000 
+   redistribute connected
+!
+management api http-commands
+   protocol http
+   protocol unix-socket
+   no shutdown
+!
+management api gnmi
+   transport grpc default
+!
+end

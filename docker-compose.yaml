@@ -1,0 +1,59 @@
+---
+version: '3'
+services:
+  ceos-1:
+    image: ${CEOS_VERSION}
+    container_name: ceos-1
+    hostname: ceos-1
+    command:
+      - "/sbin/init"
+    environment:
+      container: docker
+      EOS_PLATFORM: ceoslab
+      CEOS: 1
+      SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT: 1
+      ETBA: 1
+      INTFTYPE: eth
+    tty: true
+    volumes:
+      - ./configs/ceos-1:/mnt/flash
+    privileged: true
+    build: .
+    networks:
+      - management
+      - p2p
+
+  ceos-2:
+    image: ${CEOS_VERSION}
+    container_name: ceos-2
+    hostname: ceos-2
+    command:
+      - "/sbin/init"
+    environment:
+      container: docker
+      CEOS: 1
+      EOS_PLATFORM: ceoslab
+      SKIP_ZEROTOUCH_BARRIER_IN_SYSDBINIT: 1
+      ETBA: 1
+      INTFTYPE: eth
+    tty: true
+    volumes:
+      - ./configs/ceos-2:/mnt/flash
+    privileged: true
+    build: .
+    networks:
+      - management
+      - p2p
+
+  gnmi-client:
+    image: golang:1.12
+    container_name: gnmi-client
+    command: tail -f /dev/null
+    networks:
+      - management
+
+networks:
+  management:
+    driver: bridge
+  p2p:
+    driver: bridge

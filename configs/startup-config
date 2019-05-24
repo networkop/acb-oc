@@ -1,0 +1,39 @@
+hostname ceos-2
+!
+spanning-tree mode mstp
+!
+no aaa root
+!
+username admin privilege 15 secret admin
+!
+interface Ethernet1
+   no switchport
+   ip address 12.12.12.2/24
+!
+interface Ethernet2
+!
+interface Loopback0
+   ip address 2.2.2.2/32
+!
+management api http-commands
+   protocol http
+   protocol unix-socket
+   no shutdown
+!
+router bgp 2
+neighbor 12.12.12.1 remote-as 1
+redistribute connected
+!
+management api gnmi
+transport grpc default
+port 6030
+no ssl profile
+no shutdown
+!
+ip access-list copp
+   10 permit ip any any
+!
+ip routing
+!
+control-plane
+   ip access-group copp in
