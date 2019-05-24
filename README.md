@@ -1,12 +1,42 @@
 ## Intro
 
-![](img/1.png)
 
-![](img/2.png)
+### What is OpenConfig
 
-![](img/3.png)
+* The OpenConfig Working Group is a group of network operators that defines a set of vendor-neutral data models for switch configuration and status
+* The data models are expressed in YANG, a data modelling language
+* The OpenConfig working group doesn’t mandate an API (or protocol) for client access
+* The OpenConfig data model is accessed and manipulated over a choice of  APIs; NETCONF (over SSH), gNMI (gRPC) and RESTCONF (HTTPS)
 
-![](img/4.png)
+### History
+
+* Initially NETCONF, IETF group started 2003,  first spec was RFC4741 Dec 2006
+* YANG modelling language, IETF group started 2008,  first spec was RFC6020 in Oct 2010
+* Each vendor provided their own unique YANG models
+* OpenConfig working group was established in 2014
+* The working group published its first models including BGP in 2015 
+
+### Pitch 
+
+*  Better programmatic interface to config and status
+* Better than the CLI for automated config management
+* Better than SNMP for getting telemetry
+    * Streaming, not polling!
+* Models developed in the open by operators, with feedback from vendors
+    * github.com/openconfig/public
+* Allows for cross-vendor tools to develop
+    * Where switches from different vendors are managed in the same way.
+* Models are not from the usual standard bodies IETF, IEEE not involved
+    * allows for rapid development of models
+
+### Customer Use Case
+
+* Do all config with YANG models
+    * Use OpenConfig models wherever defined
+    * Fill in gaps with proprietary models when necessary, proprietary models may be auto-generated.
+    * Common switch management, pushed to switches in a standard fashion. 
+* Stream telemetry using YANG model
+
 
 ## Useful links
 
