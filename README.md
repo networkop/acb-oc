@@ -79,7 +79,7 @@ code provider.tf
 3. First configure L2 interface
 
 
-```json
+```
 resource "gnmi_interface" "SW1_Eth1" {
     provider = "gnmi.s1"
     name = "Ethernet1"
@@ -98,7 +98,7 @@ resource "gnmi_interface" "SW2_Eth1" {
 
 4. Next configure IPv4 interface
 
-```json
+```
 resource "gnmi_interface" "SW1_Eth1" {
     provider = "gnmi.s1"
     name = "Ethernet1"
