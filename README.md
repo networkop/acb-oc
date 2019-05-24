@@ -17,6 +17,10 @@
 
 [Arista OpenConfig YANG models](https://github.com/aristanetworks/yang)
 
+[GNOI](https://github.com/openconfig/gnoi) - file transfer, ping, traceroute, clear ARP/STP/LLDP/BGP
+
+[GRIBI](https://github.com/openconfig/gribi/blob/master/proto/service/gribi.proto)
+
 ## Demo 
 
 ### 1. Setup
