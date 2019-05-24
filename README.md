@@ -95,7 +95,7 @@ GO111MODULE=on go build -o arista-gnmi github.com/aristanetworks/goarista/cmd/gn
 
 [Link](https://github.com/networkop/terraform-yang)
 
-1. Tmux-split the screen into three and start Cli sessions two smaller screens, default interface  Ethernet1
+1. Tmux-split the screen into three and start Cli sessions in two smaller screens, default interface  Ethernet1
 
 2. Open `main.tf` and `provider.tf`
 
