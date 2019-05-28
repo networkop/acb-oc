@@ -55,25 +55,41 @@
 
 ### 1. Setup
 
-```
+```bash
 export CEOS_VERSION=ceos:4.21.5F
-
 
 docker-compose up -d
 docker inspect ceos-1 |  jq '.[0].NetworkSettings.Networks.oc_management.IPAddress'
 docker inspect ceos-2 |  jq '.[0].NetworkSettings.Networks.oc_management.IPAddress'
 ```
 
-### 2. Build Arista gNMI client
+### 2. Exploring YANG models
 
+```bash
+docker exec -it gnmi-client bash
+
+GO111MODULE=on go build github.com/openconfig/goyang
+
+git clone --depth 1 https://github.com/aristanetworks/yang arista
+git clone --depth 1 https://github.com/YangModels/yang.git yang
+
+./goyang --format tree --path ./arista/ --path ./yang/standard/ietf/ \
+./arista/EOS-4.21.3F/openconfig/public/release/models/interfaces/* | more
 ```
 
+
+
+### 3. Build Arista gNMI client
+
+```
 docker exec -it gnmi-client bash
 
 GO111MODULE=on go build -o arista-gnmi github.com/aristanetworks/goarista/cmd/gnmi
 ```
 
-### 3. Demonstrate gNMI client 
+
+
+### 4. Demonstrate gNMI client 
 
 ```
 ./arista-gnmi -addr 172.20.0.2:6030 -password admin -username admin capabilities
@@ -90,6 +106,8 @@ GO111MODULE=on go build -o arista-gnmi github.com/aristanetworks/goarista/cmd/gn
 ```
 ./arista-gnmi -addr 172.20.0.2:6030 -username admin -password admin update "/interfaces/interface[name=Ethernet1]/config/enabled" "true"
 ```
+
+
 
 ## Terraform demo
 
